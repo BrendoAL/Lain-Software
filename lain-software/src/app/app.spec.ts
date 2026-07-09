@@ -14,10 +14,12 @@ describe('App', () => {
     expect(app).toBeTruthy();
   });
 
-  it('should render title', async () => {
+  it('should render the Lain Software landing page', async () => {
     const fixture = TestBed.createComponent(App);
     await fixture.whenStable();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, lain-software');
+    expect(compiled.querySelector('h1')?.textContent).toContain('Sistemas, sites e landing pages');
+    expect(compiled.textContent).toContain('Quero meu orçamento');
+    expect(compiled.querySelector('a[href^="https://wa.me/5547988805984"]')).toBeTruthy();
   });
 });
