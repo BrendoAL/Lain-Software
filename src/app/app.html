@@ -1,10 +1,10 @@
 <div class="top-contact-bar" aria-label="Contato rápido">
   <div class="top-contact-inner">
     <div class="top-contact-links">
-      <a href="tel:+5547988805984">
+      <button class="phone-copy" type="button" (click)="copyPhone()" [class.copied]="copiedPhone()">
         <img class="mini-icon" src="telefone.png" alt="" aria-hidden="true">
-        (47) 98880-5984
-      </a>
+        <span>{{ copiedPhone() ? 'Telefone copiado' : '(47) 98880-5984' }}</span>
+      </button>
       <a href="mailto:BRENDOALMEIDALK@GMAIL.COM">
         <img class="mini-icon" src="email_icon.webp" alt="" aria-hidden="true">
         BRENDOALMEIDALK&#64;GMAIL.COM
@@ -13,11 +13,11 @@
 
     <div class="top-social-links" aria-label="Redes sociais">
       <a class="disabled-link" href="#" aria-disabled="true" title="Facebook pendente">
-        <img class="mini-icon" src="Facebook.png" alt="" aria-hidden="true">
+        <img class="social-icon" src="Facebook.png" alt="" aria-hidden="true">
         Facebook
       </a>
       <a class="disabled-link" href="#" aria-disabled="true" title="LinkedIn pendente">
-        <img class="mini-icon" src="linkedin_icone.webp" alt="" aria-hidden="true">
+        <img class="social-icon" src="linkedin_icone.webp" alt="" aria-hidden="true">
         LinkedIn
       </a>
     </div>
@@ -241,20 +241,12 @@
 
     <div class="faq-list">
       <details>
-        <summary>Preciso ter tudo definido antes de pedir orçamento?</summary>
+        <summary>Preciso ter tudo definido antes de pedir um orçamento?</summary>
         <p>Não. Uma descrição simples do objetivo já ajuda a entender o caminho e levantar as perguntas certas.</p>
       </details>
       <details>
         <summary>A Lain Software faz apenas sites?</summary>
-        <p>Não. A prioridade é web: landing pages, sites, sistemas internos, automações e demandas digitais sob medida.</p>
-      </details>
-      <details>
-        <summary>O site fica responsivo para celular?</summary>
-        <p>Sim. A primeira versão já considera layout para desktop, tablet e mobile.</p>
-      </details>
-      <details>
-        <summary>Tem portfólio disponível?</summary>
-        <p>A área de portfólio pode ser adicionada quando os primeiros projetos públicos estiverem prontos.</p>
+        <p>Não. Também fazemos landing pages, automações, sistemas internos e soluções sob medida para demandas específicas do seu negócio.</p>
       </details>
     </div>
   </section>
@@ -277,10 +269,10 @@
       <img class="mini-icon" src="email_icon.webp" alt="" aria-hidden="true">
       BRENDOALMEIDALK&#64;GMAIL.COM
     </a>
-    <a href="tel:+5547988805984">
+    <button class="phone-copy" type="button" (click)="copyPhone()" [class.copied]="copiedPhone()">
       <img class="mini-icon" src="telefone.png" alt="" aria-hidden="true">
-      (47) 98880-5984
-    </a>
+      <span>{{ copiedPhone() ? 'Telefone copiado' : '(47) 98880-5984' }}</span>
+    </button>
     <span>
       <img class="mini-icon" src="localizacao.png" alt="" aria-hidden="true">
       Pref. Osmar Cunha, 416, sala 1108, Centro, Florianópolis - SC, 88015-100
@@ -291,11 +283,11 @@
     <strong>Redes sociais</strong>
     <div class="social-links">
       <a class="disabled-link" href="#" aria-disabled="true" title="Link do Facebook pendente">
-        <img class="mini-icon" src="Facebook.png" alt="" aria-hidden="true">
+        <img class="social-icon" src="Facebook.png" alt="" aria-hidden="true">
         Facebook
       </a>
       <a class="disabled-link" href="#" aria-disabled="true" title="Link do LinkedIn pendente">
-        <img class="mini-icon" src="linkedin_icone.webp" alt="" aria-hidden="true">
+        <img class="social-icon" src="linkedin_icone.webp" alt="" aria-hidden="true">
         LinkedIn
       </a>
     </div>
