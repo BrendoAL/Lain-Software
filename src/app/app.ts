@@ -20,12 +20,14 @@ export class App {
   private copyFeedbackTimeout?: ReturnType<typeof setTimeout>;
 
   @HostListener('window:scroll')
+  @HostListener('window:resize')
   protected syncActiveSection(): void {
     if (this.activeView() !== 'home') {
       return;
     }
 
-    const headerOffset = 170;
+    const header = document.querySelector<HTMLElement>('.site-header');
+    const headerOffset = Math.round((header?.getBoundingClientRect().height ?? 130) + 44);
     let currentSection: SectionId = 'inicio';
 
     for (const sectionId of this.sectionIds) {
@@ -94,6 +96,7 @@ export class App {
   protected showBudgetTab(event: Event): void {
     event.preventDefault();
     this.activeView.set('budget');
+    this.activeSection.set('orcamento');
     this.quoteError.set('');
 
     this.afterViewChange(() => {
