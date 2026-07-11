@@ -18,8 +18,11 @@ describe('App', () => {
     const fixture = TestBed.createComponent(App);
     await fixture.whenStable();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Sistemas, sites e landing pages');
+    expect(compiled.querySelector('h1')?.textContent).toContain('Sites e sistemas que geram resultado');
     expect(compiled.textContent).toContain('Quero meu orçamento');
+    expect(compiled.textContent).toContain('Porque escolher a Lain Software');
+    expect(compiled.querySelector('form.quote-form input[name="email"]')).toBeTruthy();
+    expect(compiled.querySelectorAll('input[name="projects"]').length).toBeGreaterThan(1);
     expect(compiled.querySelector('a[href^="https://wa.me/5547988805984"]')).toBeTruthy();
   });
 });

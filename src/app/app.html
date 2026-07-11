@@ -34,8 +34,9 @@
 
   <nav class="nav-links" aria-label="Navegação principal">
     <a href="#servicos">Serviços</a>
+    <a href="#diferenciais">Diferenciais</a>
     <a href="#processo">Processo</a>
-    <a href="#orcamento">Quero meu orçamento</a>
+    <a href="#orcamento">Orçamento</a>
     <a href="#duvidas">Dúvidas</a>
   </nav>
 
@@ -61,12 +62,12 @@
           <span class="button-icon" aria-hidden="true">WA</span>
           Falar no WhatsApp
         </a>
-        <a class="button button-secondary" href="#orcamento">Quero meu orçamento</a>
+        <a class="button button-quote" href="#orcamento">Quero meu orçamento</a>
       </div>
 
       <div class="hero-proof" aria-label="Diferenciais">
         <div>
-          <strong>Web primeiro</strong>
+          <strong>Identidade digital</strong>
           <span>Seu negócio com personalidade.</span>
         </div>
         <div>
@@ -80,40 +81,6 @@
       </div>
     </div>
 
-    <div class="hero-visual" aria-label="Prévia visual de projeto digital">
-      <div class="dashboard-shell">
-        <div class="window-bar">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-        <div class="dashboard-grid">
-          <div class="screen-card main-preview">
-            <p>Landing page</p>
-            <strong>+38%</strong>
-            <span>mais leads qualificados</span>
-          </div>
-          <div class="screen-card code-preview">
-            <span>deploy.ready()</span>
-            <span>forms.connected()</span>
-            <span>crm.workflow()</span>
-          </div>
-          <div class="screen-card metric-preview">
-            <p>Sistema interno</p>
-            <div class="metric-bars">
-              <span></span>
-              <span></span>
-              <span></span>
-            </div>
-          </div>
-          <div class="screen-card tag-preview">
-            <span>Online</span>
-            <span>Seguro</span>
-            <span>Responsivo</span>
-          </div>
-        </div>
-      </div>
-    </div>
   </section>
 
   <section class="section services-section" id="servicos">
@@ -157,6 +124,41 @@
     </div>
   </section>
 
+  <section class="section why-section" id="diferenciais">
+    <div class="section-heading compact">
+      <p class="eyebrow">Porque escolher a Lain Software</p>
+      <h2>Seu projeto acompanhado com clareza, teste e suporte.</h2>
+    </div>
+
+    <div class="why-grid">
+      <article>
+        <span aria-hidden="true">✓</span>
+        <h3>Reuniões de acompanhamento</h3>
+        <p>Você vai ser atualizado sobre o progresso do seu projeto durante a construção.</p>
+      </article>
+      <article>
+        <span aria-hidden="true">✓</span>
+        <h3>Garantia de qualidade</h3>
+        <p>Validação com testes, revisão visual e cuidado para a entrega funcionar bem em diferentes telas.</p>
+      </article>
+      <article>
+        <span aria-hidden="true">✓</span>
+        <h3>Suporte após lançamento</h3>
+        <p>Manutenção, atualizações e ajustes no seu projeto depois que ele estiver no ar.</p>
+      </article>
+      <article>
+        <span aria-hidden="true">✓</span>
+        <h3>Escopo transparente</h3>
+        <p>Você entende o que será entregue, quanto tempo deve levar e quais são os próximos passos.</p>
+      </article>
+      <article>
+        <span aria-hidden="true">✓</span>
+        <h3>Base pronta para crescer</h3>
+        <p>O projeto nasce organizado para receber novas páginas, automações, integrações e melhorias futuras.</p>
+      </article>
+    </div>
+  </section>
+
   <section class="section process-section" id="processo">
     <div class="section-heading compact">
       <p class="eyebrow">Como funciona</p>
@@ -191,45 +193,76 @@
     </div>
   </section>
 
-  <section class="quote-band" id="orcamento">
-    <div class="quote-content">
+  <section class="section quote-section" id="orcamento">
+    <div class="quote-content section-heading compact">
       <p class="eyebrow">Quero meu orçamento</p>
-      <h2>Quantos clientes você está perdendo sem uma presença digital profissional?</h2>
+      <h2>Conte o que você precisa construir.</h2>
       <p>
-        Um site lento, incompleto ou inexistente deixa oportunidades passarem. Mande uma mensagem com o tipo de projeto,
-        prazo desejado e uma descrição rápida para transformar essa ideia em uma entrega clara.
+        Preencha os dados para organizar seu pedido. Ao enviar, a Lain Software abre uma conversa no WhatsApp com as
+        informações do projeto já formatadas.
       </p>
-      <div class="contact-actions">
-        <a class="button button-primary" href="https://wa.me/5547988805984?text=Ola%2C%20quero%20um%20orcamento.%20Meu%20projeto%20e%3A%20" target="_blank" rel="noopener">
-          <span class="button-icon" aria-hidden="true">WA</span>
-          Solicitar orçamento
-        </a>
-        <a class="button button-secondary" href="mailto:BRENDOALMEIDALK@GMAIL.COM?subject=Or%C3%A7amento%20-%20Lain%20Software">
-          <span class="button-icon" aria-hidden="true">✉</span>
-          Enviar email
-        </a>
-      </div>
     </div>
 
-    <form class="quote-form" aria-label="Campos para organizar o pedido de orçamento">
+    <form class="quote-form" aria-label="Solicitação de orçamento" (submit)="submitQuote($event)">
+      <div class="form-grid">
+        <label>
+          Nome completo*
+          <input type="text" name="name" placeholder="Seu nome" autocomplete="name" required>
+        </label>
+        <label>
+          Telefone*
+          <input type="tel" name="phone" placeholder="(47) 99999-9999" autocomplete="tel" required>
+        </label>
+        <label>
+          Email*
+          <input type="email" name="email" placeholder="voce@email.com" autocomplete="email" required>
+        </label>
+        <label>
+          Empresa*
+          <input type="text" name="company" placeholder="Nome da empresa" autocomplete="organization" required>
+        </label>
+        <label>
+          Cidade*
+          <input type="text" name="city" placeholder="Sua cidade" autocomplete="address-level2" required>
+        </label>
+      </div>
+
+      <fieldset class="project-options">
+        <legend>Escolha uma ou mais opções de projeto*</legend>
+        <label><input type="checkbox" name="projects" value="Landing page"> Landing page</label>
+        <label><input type="checkbox" name="projects" value="Site institucional"> Site institucional</label>
+        <label><input type="checkbox" name="projects" value="Sistema para empresa"> Sistema para empresa</label>
+        <label><input type="checkbox" name="projects" value="Automacao ou integracao"> Automação ou integração</label>
+        <label><input type="checkbox" name="projects" value="Outro projeto web"> Outro projeto web</label>
+      </fieldset>
+
       <label>
-        Nome
-        <input type="text" name="name" placeholder="Seu nome" autocomplete="name">
+        Resumo do projeto*
+        <textarea name="message" rows="5" placeholder="Descreva rapidamente o que você quer construir" required></textarea>
       </label>
-      <label>
-        Tipo de projeto
-        <select name="project">
-          <option>Landing page</option>
-          <option>Site institucional</option>
-          <option>Sistema para empresa</option>
-          <option>Outro projeto web</option>
-        </select>
+
+      <div class="estimate-panel" aria-label="Estimativa do projeto">
+        <h3>Estimativa do projeto</h3>
+        <label>
+          Qual é o seu prazo estimado?*
+          <input type="text" name="estimatedTime" placeholder="Exemplo: 1 a 2 meses; 2 semanas" required>
+        </label>
+        <label>
+          Qual o orçamento estimado?*
+          <input type="text" name="budget" placeholder="Exemplo: R$ 1500" required>
+        </label>
+      </div>
+
+      <label class="terms-check">
+        <input type="checkbox" name="terms" required>
+        <span>Li e aceito os Termos de Uso e a Política de privacidade*</span>
       </label>
-      <label>
-        Resumo
-        <textarea name="message" rows="4" placeholder="Descreva rapidamente o que você quer construir"></textarea>
-      </label>
-      <p>Use estes campos para organizar a ideia antes de chamar no WhatsApp ou enviar por email.</p>
+
+      @if (quoteError()) {
+        <p class="form-error" role="alert">{{ quoteError() }}</p>
+      }
+
+      <button class="button button-quote form-submit" type="submit">Solicitar Orçamento</button>
     </form>
   </section>
 
