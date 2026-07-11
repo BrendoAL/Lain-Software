@@ -45,7 +45,9 @@ summary {
 #processo,
 #orcamento,
 #duvidas,
-#orcamento-tab {
+#orcamento-tab,
+#termos-de-uso,
+#politica-de-privacidade {
   scroll-margin-top: 132px;
 }
 
@@ -1009,6 +1011,36 @@ h1 {
   accent-color: var(--purple-2);
 }
 
+.terms-check span {
+  line-height: 1.5;
+}
+
+.terms-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 1px 8px;
+  color: #04100a;
+  font-weight: 950;
+  line-height: 1.25;
+  background: linear-gradient(135deg, var(--green), #8fffba);
+  border: 1px solid rgba(34, 197, 94, 0.58);
+  border-radius: 999px;
+  box-shadow: 0 0 0 1px rgba(34, 197, 94, 0.14), 0 12px 34px rgba(34, 197, 94, 0.18);
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    filter 180ms ease;
+}
+
+.terms-link:hover,
+.terms-link:focus-visible {
+  transform: translateY(-1px);
+  filter: saturate(1.08);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.22), 0 16px 38px rgba(34, 197, 94, 0.24);
+}
+
 .estimate-panel {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1161,6 +1193,86 @@ h1 {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
+.legal-page {
+  width: min(980px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 72px 0 96px;
+  animation: reveal-up 720ms ease both;
+}
+
+.legal-hero {
+  position: relative;
+  overflow: hidden;
+  padding: 44px;
+  background:
+    linear-gradient(135deg, rgba(168, 85, 247, 0.18), rgba(15, 15, 26, 0.84)),
+    rgba(255, 255, 255, 0.045);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+}
+
+.legal-hero::before {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  content: "";
+  background: linear-gradient(120deg, transparent 0 42%, rgba(34, 197, 94, 0.14) 42% 44%, transparent 44% 100%);
+  animation: panel-scan 5s ease-in-out infinite;
+}
+
+.legal-hero > * {
+  position: relative;
+}
+
+.legal-hero h1 {
+  max-width: 840px;
+  font-size: 4.1rem;
+}
+
+.legal-hero p:not(.eyebrow) {
+  max-width: 720px;
+  margin-top: 20px;
+  color: var(--soft);
+  font-size: 1.08rem;
+  line-height: 1.72;
+}
+
+.legal-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 30px;
+}
+
+.legal-content {
+  display: grid;
+  gap: 18px;
+  margin-top: 24px;
+}
+
+.legal-content article {
+  padding: 30px;
+  color: var(--soft);
+  background: rgba(15, 15, 26, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 8px;
+}
+
+.legal-content h2 {
+  margin-bottom: 14px;
+  color: #ffffff;
+  font-size: 1.45rem;
+}
+
+.legal-content p + p {
+  margin-top: 14px;
+}
+
+.legal-content p {
+  line-height: 1.72;
+}
+
 @keyframes panel-scan {
   0%,
   100% {
@@ -1261,7 +1373,9 @@ address a:hover,
   #processo,
   #orcamento,
   #duvidas,
-  #orcamento-tab {
+  #orcamento-tab,
+  #termos-de-uso,
+  #politica-de-privacidade {
     scroll-margin-top: 156px;
   }
 
@@ -1294,7 +1408,8 @@ address a:hover,
   }
 
   h1,
-  .budget-copy h1 {
+  .budget-copy h1,
+  .legal-hero h1 {
     font-size: 4.2rem;
   }
 
@@ -1413,7 +1528,8 @@ address a:hover,
   .hero-section,
   .section,
   .site-footer,
-  .budget-page {
+  .budget-page,
+  .legal-page {
     width: min(100% - 24px, 1180px);
   }
 
@@ -1423,7 +1539,8 @@ address a:hover,
   }
 
   h1,
-  .budget-copy h1 {
+  .budget-copy h1,
+  .legal-hero h1 {
     font-size: 3rem;
     line-height: 1.02;
   }
@@ -1492,6 +1609,11 @@ address a:hover,
     padding: 28px 18px;
   }
 
+  .legal-hero,
+  .legal-content article {
+    padding: 28px 18px;
+  }
+
   .quote-form,
   .quote-form-large {
     padding: 22px 16px;
@@ -1526,7 +1648,9 @@ address a:hover,
   #processo,
   #orcamento,
   #duvidas,
-  #orcamento-tab {
+  #orcamento-tab,
+  #termos-de-uso,
+  #politica-de-privacidade {
     scroll-margin-top: 148px;
   }
 
@@ -1542,7 +1666,8 @@ address a:hover,
   .hero-section,
   .section,
   .site-footer,
-  .budget-page {
+  .budget-page,
+  .legal-page {
     width: min(100% - 20px, 1180px);
   }
 
@@ -1599,7 +1724,8 @@ address a:hover,
   }
 
   h1,
-  .budget-copy h1 {
+  .budget-copy h1,
+  .legal-hero h1 {
     font-size: 2.45rem;
     line-height: 1.04;
   }
@@ -1620,14 +1746,16 @@ address a:hover,
   .section-heading > p:last-child,
   .manual-cost-heading > p:last-child,
   .quote-intro-copy p,
-  .budget-copy > p {
+  .budget-copy > p,
+  .legal-hero p:not(.eyebrow) {
     font-size: 0.96rem;
     line-height: 1.62;
   }
 
   .hero-actions,
   .contact-actions,
-  .budget-actions {
+  .budget-actions,
+  .legal-actions {
     gap: 10px;
     margin-top: 26px;
   }

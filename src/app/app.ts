@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, HostListener, signal } from '@angular/core';
 
 type ActiveView = 'home' | 'budget';
+type LegalSectionId = 'termos-de-uso' | 'politica-de-privacidade';
 type SectionId = 'inicio' | 'servicos' | 'diferenciais' | 'processo' | 'orcamento' | 'duvidas';
 
 @Component({
@@ -113,6 +114,17 @@ export class App implements AfterViewInit {
     this.afterViewChange(() => {
       document.getElementById('orcamento-tab')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
       history.replaceState(null, '', '#orcamento-tab');
+    });
+  }
+
+  protected showLegalSection(event: Event, sectionId: LegalSectionId): void {
+    event.preventDefault();
+    event.stopPropagation();
+    this.quoteError.set('');
+
+    this.afterViewChange(() => {
+      document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      history.replaceState(null, '', `#${sectionId}`);
     });
   }
 
