@@ -25,7 +25,7 @@
 </div>
 
 <header class="site-header">
-  <a class="brand" href="#inicio" aria-label="Lain Software">
+  <a class="brand" href="#inicio" aria-label="Lain Software" (click)="showHomeSection($event, 'inicio')">
     <span class="brand-mark">
       <img src="logo.png" alt="" aria-hidden="true">
     </span>
@@ -33,11 +33,12 @@
   </a>
 
   <nav class="nav-links" aria-label="Navegação principal">
-    <a href="#servicos">Serviços</a>
-    <a href="#diferenciais">Diferenciais</a>
-    <a href="#processo">Processo</a>
-    <a href="#orcamento">Orçamento</a>
-    <a href="#duvidas">Dúvidas</a>
+    <a href="#inicio" [class.active]="activeView() === 'home' && activeSection() === 'inicio'" (click)="showHomeSection($event, 'inicio')">Início</a>
+    <a href="#servicos" [class.active]="activeView() === 'home' && activeSection() === 'servicos'" (click)="showHomeSection($event, 'servicos')">Serviços</a>
+    <a href="#diferenciais" [class.active]="activeView() === 'home' && activeSection() === 'diferenciais'" (click)="showHomeSection($event, 'diferenciais')">Diferenciais</a>
+    <a href="#processo" [class.active]="activeView() === 'home' && activeSection() === 'processo'" (click)="showHomeSection($event, 'processo')">Processo</a>
+    <a href="#orcamento-tab" [class.active]="activeView() === 'budget' || activeSection() === 'orcamento'" (click)="showBudgetTab($event)">Orçamento</a>
+    <a href="#duvidas" [class.active]="activeView() === 'home' && activeSection() === 'duvidas'" (click)="showHomeSection($event, 'duvidas')">Dúvidas</a>
   </nav>
 
   <a class="header-cta" href="https://wa.me/5547988805984?text=Ola%2C%20vim%20pelo%20site%20da%20Lain%20Software%20e%20quero%20falar%20sobre%20um%20projeto." target="_blank" rel="noopener">
@@ -46,6 +47,7 @@
 </header>
 
 <main id="inicio">
+@if (activeView() === 'home') {
   <section class="hero-section">
     <div class="hero-content">
       <p class="eyebrow">Desenvolvimento web personalizado</p>
@@ -62,7 +64,7 @@
           <span class="button-icon" aria-hidden="true">WA</span>
           Falar no WhatsApp
         </a>
-        <a class="button button-quote" href="#orcamento">Quero meu orçamento</a>
+        <a class="button button-quote" href="#orcamento-tab" (click)="showBudgetTab($event)">Quero meu orçamento</a>
       </div>
 
       <div class="hero-proof" aria-label="Diferenciais">
@@ -194,16 +196,21 @@
   </section>
 
   <section class="section quote-section" id="orcamento">
-    <div class="quote-content section-heading compact">
-      <p class="eyebrow">Quero meu orçamento</p>
-      <h2>Conte o que você precisa construir.</h2>
-      <p>
-        Preencha os dados para organizar seu pedido. Ao enviar, a Lain Software abre uma conversa no WhatsApp com as
-        informações do projeto já formatadas.
-      </p>
+    <div class="quote-content quote-intro">
+      <div>
+        <p class="eyebrow">Quero meu orçamento</p>
+        <h2>Conte o que você precisa construir.</h2>
+      </div>
+      <div class="quote-intro-copy">
+        <p>
+          Preencha os dados para organizar seu pedido. Ao enviar, a Lain Software abre uma conversa no WhatsApp com as
+          informações do projeto já formatadas.
+        </p>
+        <a class="inline-tab-link" href="#orcamento-tab" (click)="showBudgetTab($event)">Abrir aba de orçamento</a>
+      </div>
     </div>
 
-    <form class="quote-form" aria-label="Solicitação de orçamento" (submit)="submitQuote($event)">
+    <form class="quote-form main-quote-form" aria-label="Solicitação de orçamento" (submit)="submitQuote($event)">
       <div class="form-grid">
         <label>
           Nome completo*
@@ -281,8 +288,121 @@
         <summary>A Lain Software faz apenas sites?</summary>
         <p>Não. Também fazemos landing pages, automações, sistemas internos e soluções sob medida para demandas específicas do seu negócio.</p>
       </details>
+      <details>
+        <summary>Quanto tempo leva para receber uma proposta?</summary>
+        <p>Depois do envio do formulário, a resposta inicial costuma partir dos dados enviados: tipo de projeto, prazo, orçamento e nível de detalhe do resumo.</p>
+      </details>
+      <details>
+        <summary>Vocês ajudam com domínio, hospedagem e publicação?</summary>
+        <p>Sim. A entrega pode incluir orientação e configuração básica para colocar o projeto no ar com domínio, hospedagem e deploy organizados.</p>
+      </details>
+      <details>
+        <summary>Depois do lançamento posso pedir melhorias?</summary>
+        <p>Sim. O projeto pode seguir com manutenção, ajustes, novas páginas, integrações ou evoluções conforme a necessidade do negócio.</p>
+      </details>
     </div>
   </section>
+} @else {
+  <section class="budget-page" id="orcamento-tab" aria-labelledby="budget-title">
+    <div class="budget-hero">
+      <div class="budget-copy">
+        <p class="eyebrow">Aba de orçamento</p>
+        <h1 id="budget-title">Solicite seu orçamento com todos os dados no lugar.</h1>
+        <p>
+          Esta aba separa o pedido do restante da página para você preencher com calma. Ao final, a mensagem é enviada
+          pelo WhatsApp já organizada com contato, empresa, cidade, tipo de projeto, prazo e orçamento estimado.
+        </p>
+        <div class="budget-actions">
+          <a class="button button-secondary" href="#inicio" (click)="showHomeSection($event, 'inicio')">Voltar ao início</a>
+          <a class="button button-primary" href="https://wa.me/5547988805984?text=Ola%2C%20vim%20pelo%20site%20da%20Lain%20Software%20e%20quero%20tirar%20uma%20duvida%20antes%20do%20orcamento." target="_blank" rel="noopener">
+            <span class="button-icon" aria-hidden="true">WA</span>
+            Tirar dúvida
+          </a>
+        </div>
+      </div>
+
+      <aside class="budget-steps" aria-label="Como o pedido será organizado">
+        <article>
+          <span>01</span>
+          <strong>Contato completo</strong>
+          <p>Telefone, email, empresa e cidade para retorno rápido.</p>
+        </article>
+        <article>
+          <span>02</span>
+          <strong>Escopo selecionável</strong>
+          <p>Mais de um tipo de projeto pode ser marcado no mesmo pedido.</p>
+        </article>
+        <article>
+          <span>03</span>
+          <strong>Estimativa clara</strong>
+          <p>Prazo e orçamento ajudam a montar uma proposta realista.</p>
+        </article>
+      </aside>
+    </div>
+
+    <form class="quote-form quote-form-large" aria-label="Solicitação de orçamento em aba separada" (submit)="submitQuote($event)">
+      <div class="form-grid">
+        <label>
+          Nome completo*
+          <input type="text" name="name" placeholder="Seu nome" autocomplete="name" required>
+        </label>
+        <label>
+          Telefone*
+          <input type="tel" name="phone" placeholder="(47) 99999-9999" autocomplete="tel" required>
+        </label>
+        <label>
+          Email*
+          <input type="email" name="email" placeholder="voce@email.com" autocomplete="email" required>
+        </label>
+        <label>
+          Empresa*
+          <input type="text" name="company" placeholder="Nome da empresa" autocomplete="organization" required>
+        </label>
+        <label>
+          Cidade*
+          <input type="text" name="city" placeholder="Sua cidade" autocomplete="address-level2" required>
+        </label>
+      </div>
+
+      <fieldset class="project-options">
+        <legend>Escolha uma ou mais opções de projeto*</legend>
+        <label><input type="checkbox" name="projects" value="Landing page"> Landing page</label>
+        <label><input type="checkbox" name="projects" value="Site institucional"> Site institucional</label>
+        <label><input type="checkbox" name="projects" value="Sistema para empresa"> Sistema para empresa</label>
+        <label><input type="checkbox" name="projects" value="Automacao ou integracao"> Automação ou integração</label>
+        <label><input type="checkbox" name="projects" value="Outro projeto web"> Outro projeto web</label>
+      </fieldset>
+
+      <label>
+        Resumo do projeto*
+        <textarea name="message" rows="5" placeholder="Descreva rapidamente o que você quer construir" required></textarea>
+      </label>
+
+      <div class="estimate-panel" aria-label="Estimativa do projeto">
+        <h3>Estimativa do projeto</h3>
+        <label>
+          Qual é o seu prazo estimado?*
+          <input type="text" name="estimatedTime" placeholder="Exemplo: 1 a 2 meses; 2 semanas" required>
+        </label>
+        <label>
+          Qual o orçamento estimado?*
+          <input type="text" name="budget" placeholder="Exemplo: R$ 1500" required>
+        </label>
+      </div>
+
+      <label class="terms-check">
+        <input type="checkbox" name="terms" required>
+        <span>Li e aceito os Termos de Uso e a Política de privacidade*</span>
+      </label>
+
+      @if (quoteError()) {
+        <p class="form-error" role="alert">{{ quoteError() }}</p>
+      }
+
+      <button class="button button-quote form-submit" type="submit">Solicitar Orçamento</button>
+    </form>
+  </section>
+}
 </main>
 
 <footer class="site-footer">
