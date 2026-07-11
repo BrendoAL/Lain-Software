@@ -20,6 +20,8 @@ describe('App', () => {
     const compiled = fixture.nativeElement as HTMLElement;
     expect(compiled.querySelector('h1')?.textContent).toContain('Sites e sistemas que geram resultado');
     expect(compiled.querySelector('.nav-links a[href="#inicio"]')?.textContent).toContain('Início');
+    expect(compiled.textContent).toContain('Quanto custa continuar no manual?');
+    expect(compiled.textContent).toContain('79% dos brasileiros pesquisam antes de comprar');
     expect(compiled.textContent).toContain('Quero meu orçamento');
     expect(compiled.textContent).toContain('Porque escolher a Lain Software');
     expect(compiled.textContent).toContain('Quanto tempo leva para receber uma proposta?');

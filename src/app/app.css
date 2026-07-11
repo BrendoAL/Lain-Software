@@ -525,6 +525,116 @@ h1 {
   line-height: 1.75;
 }
 
+.manual-cost-section {
+  padding-top: 42px;
+  border-top: 1px solid var(--line);
+}
+
+.manual-cost-heading {
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(320px, 0.72fr);
+  gap: 34px;
+  align-items: start;
+  margin-bottom: 24px;
+}
+
+.manual-cost-heading .eyebrow {
+  margin-bottom: 14px;
+}
+
+.manual-cost-heading h2 {
+  max-width: 780px;
+  font-size: 3.8rem;
+  line-height: 1.02;
+  font-weight: 900;
+}
+
+.manual-cost-heading > p:last-child {
+  color: var(--soft);
+  font-size: 1.08rem;
+  line-height: 1.7;
+}
+
+.manual-cost-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.manual-cost-grid article,
+.manual-cost-summary {
+  background: rgba(255, 255, 255, 0.045);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 8px;
+  animation: reveal-up 720ms ease both;
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    background 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.manual-cost-grid article {
+  min-height: 288px;
+  padding: 24px;
+}
+
+.manual-cost-grid article:nth-child(2) {
+  animation-delay: 90ms;
+}
+
+.manual-cost-grid article:nth-child(3) {
+  animation-delay: 180ms;
+}
+
+.manual-cost-grid article:hover {
+  transform: translateY(-4px);
+  background: rgba(168, 85, 247, 0.08);
+  border-color: rgba(168, 85, 247, 0.32);
+}
+
+.manual-cost-grid strong {
+  display: block;
+  margin-bottom: 28px;
+  color: transparent;
+  background: linear-gradient(135deg, var(--green), #f5fff8 52%, var(--purple-2));
+  background-clip: text;
+  font-size: 3.4rem;
+  line-height: 1;
+  font-weight: 900;
+}
+
+.manual-cost-grid h3 {
+  margin-bottom: 12px;
+  color: #ffffff;
+  font-size: 1.22rem;
+}
+
+.manual-cost-grid p {
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+.manual-cost-summary {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 24px;
+  align-items: center;
+  margin-top: 14px;
+  padding: 24px;
+  background:
+    linear-gradient(135deg, rgba(168, 85, 247, 0.15), rgba(34, 197, 94, 0.08)),
+    rgba(255, 255, 255, 0.045);
+}
+
+.manual-cost-summary p {
+  max-width: 800px;
+  color: #ffffff;
+  font-size: 1.12rem;
+  line-height: 1.65;
+  font-weight: 800;
+}
+
 .service-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -1081,7 +1191,8 @@ h1 {
 
 .site-footer {
   display: grid;
-  grid-template-columns: 1fr 1.2fr 0.7fr;
+  grid-template-columns: 1fr 1.2fr 0.8fr;
+  align-items: start;
   gap: 28px;
   width: min(1180px, calc(100% - 32px));
   margin: 0 auto;
@@ -1098,6 +1209,7 @@ h1 {
 address,
 .social-area {
   display: grid;
+  align-content: start;
   gap: 10px;
   font-style: normal;
 }
@@ -1116,6 +1228,10 @@ address a:hover,
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
+}
+
+.social-links a {
+  min-height: 34px;
 }
 
 @media (max-width: 980px) {
@@ -1164,6 +1280,7 @@ address a:hover,
   }
 
   .section-heading,
+  .manual-cost-heading,
   .quote-intro,
   .budget-hero {
     grid-template-columns: 1fr;
@@ -1175,6 +1292,7 @@ address a:hover,
   }
 
   .hero-proof,
+  .manual-cost-grid,
   .service-grid,
   .why-grid,
   .timeline,
@@ -1279,6 +1397,7 @@ address a:hover,
   }
 
   .section-heading h2,
+  .manual-cost-heading h2,
   .quote-content h2 {
     font-size: 2.25rem;
     line-height: 1.08;
@@ -1295,6 +1414,7 @@ address a:hover,
   }
 
   .hero-proof,
+  .manual-cost-grid,
   .service-grid,
   .why-grid,
   .timeline,
@@ -1307,6 +1427,7 @@ address a:hover,
   }
 
   .hero-proof div,
+  .manual-cost-grid article,
   .service-card,
   .timeline article,
   .why-grid article {
@@ -1318,6 +1439,7 @@ address a:hover,
   }
 
   .hero-proof div,
+  .manual-cost-grid article,
   .service-card,
   .timeline article,
   .why-grid article,
@@ -1327,6 +1449,11 @@ address a:hover,
 
   .quote-section {
     padding: 40px 16px;
+  }
+
+  .manual-cost-summary {
+    grid-template-columns: 1fr;
+    padding: 20px 18px;
   }
 
   .budget-copy {
@@ -1438,6 +1565,7 @@ address a:hover,
   }
 
   .section-heading h2,
+  .manual-cost-heading h2,
   .quote-content h2 {
     font-size: 2rem;
   }
@@ -1450,6 +1578,7 @@ address a:hover,
 
   .hero-copy,
   .section-heading > p:last-child,
+  .manual-cost-heading > p:last-child,
   .quote-intro-copy p,
   .budget-copy > p {
     font-size: 0.96rem;
@@ -1468,8 +1597,22 @@ address a:hover,
   }
 
   .service-card h3,
+  .manual-cost-grid h3,
   .timeline h3 {
     font-size: 1.2rem;
+  }
+
+  .manual-cost-section {
+    padding-top: 36px;
+  }
+
+  .manual-cost-grid strong {
+    margin-bottom: 22px;
+    font-size: 2.8rem;
+  }
+
+  .manual-cost-summary p {
+    font-size: 1rem;
   }
 
   .quote-section {
@@ -1543,11 +1686,13 @@ address a:hover,
   }
 
   .section-heading h2,
+  .manual-cost-heading h2,
   .quote-content h2 {
     font-size: 1.75rem;
   }
 
   .hero-proof div,
+  .manual-cost-grid article,
   .service-card,
   .timeline article,
   .why-grid article,
