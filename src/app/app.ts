@@ -1,4 +1,4 @@
-import { Component, HostListener, signal } from '@angular/core';
+import { AfterViewInit, Component, HostListener, signal } from '@angular/core';
 
 type ActiveView = 'home' | 'budget';
 type SectionId = 'inicio' | 'servicos' | 'diferenciais' | 'processo' | 'orcamento' | 'duvidas';
@@ -9,19 +9,30 @@ type SectionId = 'inicio' | 'servicos' | 'diferenciais' | 'processo' | 'orcament
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
-export class App {
+export class App implements AfterViewInit {
   protected readonly title = signal('lain-software');
   protected readonly copiedPhone = signal(false);
   protected readonly quoteError = signal('');
   protected readonly activeView = signal<ActiveView>('home');
   protected readonly activeSection = signal<SectionId>('inicio');
+  protected readonly pinnedHeader = signal(false);
 
   private readonly sectionIds: SectionId[] = ['inicio', 'servicos', 'diferenciais', 'processo', 'orcamento', 'duvidas'];
   private copyFeedbackTimeout?: ReturnType<typeof setTimeout>;
 
+  ngAfterViewInit(): void {
+    this.afterViewChange(() => this.syncPinnedHeader());
+  }
+
   @HostListener('window:scroll')
   @HostListener('window:resize')
   protected syncActiveSection(): void {
+    if (typeof document === 'undefined') {
+      return;
+    }
+
+    this.syncPinnedHeader();
+
     if (this.activeView() !== 'home') {
       return;
     }
@@ -145,5 +156,16 @@ export class App {
 
   private afterViewChange(callback: () => void): void {
     setTimeout(callback);
+  }
+
+  private syncPinnedHeader(): void {
+    if (typeof window === 'undefined' || typeof document === 'undefined') {
+      return;
+    }
+
+    const topContactBar = document.querySelector<HTMLElement>('.top-contact-bar');
+    const topContactHeight = topContactBar?.offsetHeight ?? 0;
+
+    this.pinnedHeader.set(window.scrollY > topContactHeight);
   }
 }

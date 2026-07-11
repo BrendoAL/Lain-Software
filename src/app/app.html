@@ -20,7 +20,7 @@
   </div>
 </div>
 
-<header class="site-header">
+<header class="site-header" [class.header-pinned]="pinnedHeader()">
   <a class="brand" href="#inicio" aria-label="Lain Software" (click)="showHomeSection($event, 'inicio')">
     <span class="brand-mark">
       <img src="logo.png" alt="" aria-hidden="true">
@@ -41,6 +41,8 @@
     Falar no WhatsApp
   </a>
 </header>
+
+<div class="site-header-spacer" [class.visible]="pinnedHeader()" aria-hidden="true"></div>
 
 <main id="inicio">
 @if (activeView() === 'home') {
@@ -132,8 +134,7 @@
       <p class="eyebrow">O que a Lain faz</p>
       <h2>Produtos digitais para vender, organizar e automatizar.</h2>
       <p>
-        Como esta é uma fase inicial da marca, a proposta é simples: entender sua demanda, transformar em uma entrega
-        objetiva e deixar uma base profissional para crescer.
+        A proposta é simples: entender sua demanda, transformar em uma entrega.
       </p>
     </div>
 
@@ -455,7 +456,7 @@
       </span>
       <span class="brand-name">Lain Software</span>
     </a>
-    <p>Desenvolvimento web em Florianópolis, SC.</p>
+    <p>Desenvolvimento de Software</p>
   </div>
 
   <address>
