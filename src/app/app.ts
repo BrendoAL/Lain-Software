@@ -175,8 +175,12 @@ export class App implements AfterViewInit {
 
   private async copyText(text: string): Promise<void> {
     if (navigator.clipboard?.writeText) {
-      await navigator.clipboard.writeText(text);
-      return;
+      try {
+        await navigator.clipboard.writeText(text);
+        return;
+      } catch {
+        // Fall back to the hidden input copy path below.
+      }
     }
 
     const input = document.createElement('input');
