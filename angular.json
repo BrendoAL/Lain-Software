@@ -63,6 +63,9 @@
         },
         "serve": {
           "builder": "@angular/build:dev-server",
+          "options": {
+            "hmr": true
+          },
           "configurations": {
             "production": {
               "buildTarget": "lain-software:build:production"

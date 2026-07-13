@@ -151,6 +151,46 @@ address span,
   border-radius: 999px;
 }
 
+.email-icon {
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.16));
+}
+
+.phone-icon {
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  filter: drop-shadow(0 0 6px rgba(53, 227, 165, 0.24));
+}
+
+.location-icon {
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  filter: drop-shadow(0 0 6px rgba(192, 132, 252, 0.24));
+}
+
+.linkedin-icon {
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  border-radius: 6px;
+  object-fit: contain;
+}
+
 .site-header {
   position: relative;
   z-index: 20;

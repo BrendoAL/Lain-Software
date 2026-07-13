@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --host 127.0.0.1 --port 4200 --poll 1000 --live-reload",
     "build": "ng build",
     "deploy": "npm run build && npx wrangler deploy",
     "watch": "ng build --watch --configuration development",
