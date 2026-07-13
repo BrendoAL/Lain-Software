@@ -97,9 +97,7 @@ main::before {
 
 .top-contact-bar a,
 .phone-copy,
-.email-actions,
 .email-link,
-.email-copy,
 address a,
 address span,
 .social-links a {
@@ -110,7 +108,6 @@ address span,
   overflow-wrap: anywhere;
 }
 
-.email-copy,
 .phone-copy {
   padding: 0;
   color: inherit;
@@ -120,43 +117,15 @@ address span,
   font: inherit;
 }
 
-.email-actions {
-  gap: 6px;
-}
-
 .email-link {
   min-height: 34px;
-}
-
-.email-copy {
-  min-height: 30px;
-  padding: 0 10px;
-  color: #d9ffe7;
-  background: rgba(34, 197, 94, 0.1);
-  border: 1px solid rgba(34, 197, 94, 0.22);
-  border-radius: 8px;
-  font-size: 0.78rem;
-  font-weight: 800;
-  transition:
-    color 180ms ease,
-    background 180ms ease,
-    border-color 180ms ease,
-    transform 180ms ease;
 }
 
 .phone-copy:hover,
 .phone-copy.copied,
 .email-link:hover,
-.email-copy:hover,
-.email-copy.copied {
+.email-link.copied {
   color: var(--green);
-}
-
-.email-copy:hover,
-.email-copy.copied {
-  background: rgba(34, 197, 94, 0.16);
-  border-color: rgba(34, 197, 94, 0.42);
-  transform: translateY(-1px);
 }
 
 .mini-icon,
@@ -1546,14 +1515,9 @@ address a:hover,
   }
 
   .top-contact-bar a,
-  .phone-copy,
-  .email-actions {
+  .phone-copy {
     max-width: 100%;
     line-height: 1.35;
-  }
-
-  .email-actions {
-    flex-wrap: wrap;
   }
 
   .top-social-links a,
