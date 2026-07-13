@@ -16,6 +16,7 @@ export class App implements AfterViewInit {
   protected readonly quoteError = signal('');
   protected readonly activeView = signal<ActiveView>('home');
   protected readonly activeSection = signal<SectionId>('inicio');
+  protected readonly activeLegalSection = signal<LegalSectionId | null>(null);
   protected readonly pinnedHeader = signal(false);
 
   private readonly sectionIds: SectionId[] = ['inicio', 'servicos', 'diferenciais', 'processo', 'orcamento', 'duvidas'];
@@ -89,6 +90,7 @@ export class App implements AfterViewInit {
     event.preventDefault();
     this.activeView.set('home');
     this.activeSection.set(sectionId);
+    this.activeLegalSection.set(null);
     this.quoteError.set('');
 
     this.afterViewChange(() => {
@@ -109,6 +111,7 @@ export class App implements AfterViewInit {
     event.preventDefault();
     this.activeView.set('budget');
     this.activeSection.set('orcamento');
+    this.activeLegalSection.set(null);
     this.quoteError.set('');
 
     this.afterViewChange(() => {
@@ -120,6 +123,7 @@ export class App implements AfterViewInit {
   protected showLegalSection(event: Event, sectionId: LegalSectionId): void {
     event.preventDefault();
     event.stopPropagation();
+    this.activeLegalSection.set(sectionId);
     this.quoteError.set('');
 
     this.afterViewChange(() => {
