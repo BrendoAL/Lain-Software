@@ -12,7 +12,7 @@
     </div>
 
     <div class="top-social-links" aria-label="Redes sociais">
-      <a href="https://www.linkedin.com/company/lain-software" target="_blank" rel="noopener" title="LinkedIn da Lain Software">
+      <a href="https://www.linkedin.com/company/lain-software" target="_blank" rel="noopener noreferrer" title="LinkedIn da Lain Software">
         <img class="social-icon linkedin-icon" src="linkedin_icone_trimmed.webp" alt="" aria-hidden="true">
         LinkedIn
       </a>
@@ -37,7 +37,7 @@
     <a href="#duvidas" [class.active]="activeView() === 'home' && activeSection() === 'duvidas'" (click)="showHomeSection($event, 'duvidas')">Dúvidas</a>
   </nav>
 
-  <a class="header-cta" href="https://wa.me/5547988805984?text=Ola%2C%20vim%20pelo%20site%20da%20Lain%20Software%20e%20quero%20falar%20sobre%20um%20projeto." target="_blank" rel="noopener">
+  <a class="header-cta" href="https://wa.me/5547988805984?text=Ola%2C%20vim%20pelo%20site%20da%20Lain%20Software%20e%20quero%20falar%20sobre%20um%20projeto." target="_blank" rel="noopener noreferrer">
     Falar no WhatsApp
   </a>
 </header>
@@ -58,7 +58,7 @@
       </p>
 
       <div class="hero-actions" aria-label="Ações principais">
-        <a class="button button-primary" href="https://wa.me/5547988805984?text=Ola%2C%20quero%20solicitar%20um%20orcamento%20com%20a%20Lain%20Software." target="_blank" rel="noopener">
+        <a class="button button-primary" href="https://wa.me/5547988805984?text=Ola%2C%20quero%20solicitar%20um%20orcamento%20com%20a%20Lain%20Software." target="_blank" rel="noopener noreferrer">
           <span class="button-icon" aria-hidden="true">WA</span>
           Falar no WhatsApp
         </a>
@@ -257,23 +257,23 @@
       <div class="form-grid">
         <label>
           Nome completo*
-          <input type="text" name="name" placeholder="Seu nome" autocomplete="name" required>
+          <input type="text" name="name" placeholder="Seu nome" autocomplete="name" minlength="2" maxlength="80" required>
         </label>
         <label>
           Telefone*
-          <input type="tel" name="phone" placeholder="(47) 99999-9999" autocomplete="tel" required>
+          <input type="tel" name="phone" placeholder="(47) 99999-9999" autocomplete="tel" inputmode="tel" minlength="10" maxlength="20" pattern="[0-9() +.-]{10,20}" required>
         </label>
         <label>
           Email*
-          <input type="email" name="email" placeholder="voce@email.com" autocomplete="email" required>
+          <input type="email" name="email" placeholder="voce@email.com" autocomplete="email" maxlength="120" required>
         </label>
         <label>
           Empresa*
-          <input type="text" name="company" placeholder="Nome da empresa" autocomplete="organization" required>
+          <input type="text" name="company" placeholder="Nome da empresa" autocomplete="organization" minlength="2" maxlength="100" required>
         </label>
         <label>
           Cidade*
-          <input type="text" name="city" placeholder="Sua cidade" autocomplete="address-level2" required>
+          <input type="text" name="city" placeholder="Sua cidade" autocomplete="address-level2" minlength="2" maxlength="80" required>
         </label>
       </div>
 
@@ -288,18 +288,18 @@
 
       <label>
         Resumo do projeto*
-        <textarea name="message" rows="5" placeholder="Descreva rapidamente o que você quer construir" required></textarea>
+        <textarea name="message" rows="5" placeholder="Descreva o que você quer construir" minlength="20" maxlength="1000" required></textarea>
       </label>
 
       <div class="estimate-panel" aria-label="Estimativa do projeto">
         <h3>Estimativa do projeto</h3>
         <label>
           Qual é o seu prazo estimado?*
-          <input type="text" name="estimatedTime" placeholder="Exemplo: 1 a 2 meses; 2 semanas" required>
+          <input type="text" name="estimatedTime" placeholder="Exemplo: 1 a 2 meses; 2 semanas" maxlength="80" required>
         </label>
         <label>
           Qual o orçamento estimado?*
-          <input type="text" name="budget" placeholder="Exemplo: R$ 1500" required>
+          <input type="text" name="budget" placeholder="Exemplo: R$ 1500" maxlength="60" required>
         </label>
       </div>
 
@@ -362,7 +362,7 @@
         </p>
         <div class="budget-actions">
           <a class="button button-secondary" href="#inicio" (click)="showHomeSection($event, 'inicio')">Voltar ao início</a>
-          <a class="button button-primary" href="https://wa.me/5547988805984?text=Ola%2C%20vim%20pelo%20site%20da%20Lain%20Software%20e%20quero%20tirar%20uma%20duvida%20antes%20do%20orcamento." target="_blank" rel="noopener">
+          <a class="button button-primary" href="https://wa.me/5547988805984?text=Ola%2C%20vim%20pelo%20site%20da%20Lain%20Software%20e%20quero%20tirar%20uma%20duvida%20antes%20do%20orcamento." target="_blank" rel="noopener noreferrer">
             <span class="button-icon" aria-hidden="true">WA</span>
             Tirar dúvida
           </a>
@@ -392,23 +392,23 @@
       <div class="form-grid">
         <label>
           Nome completo*
-          <input type="text" name="name" placeholder="Seu nome" autocomplete="name" required>
+          <input type="text" name="name" placeholder="Seu nome" autocomplete="name" minlength="2" maxlength="80" required>
         </label>
         <label>
           Telefone*
-          <input type="tel" name="phone" placeholder="(47) 99999-9999" autocomplete="tel" required>
+          <input type="tel" name="phone" placeholder="(47) 99999-9999" autocomplete="tel" inputmode="tel" minlength="10" maxlength="20" pattern="[0-9() +.-]{10,20}" required>
         </label>
         <label>
           Email*
-          <input type="email" name="email" placeholder="voce@email.com" autocomplete="email" required>
+          <input type="email" name="email" placeholder="voce@email.com" autocomplete="email" maxlength="120" required>
         </label>
         <label>
           Empresa*
-          <input type="text" name="company" placeholder="Nome da empresa" autocomplete="organization" required>
+          <input type="text" name="company" placeholder="Nome da empresa" autocomplete="organization" minlength="2" maxlength="100" required>
         </label>
         <label>
           Cidade*
-          <input type="text" name="city" placeholder="Sua cidade" autocomplete="address-level2" required>
+          <input type="text" name="city" placeholder="Sua cidade" autocomplete="address-level2" minlength="2" maxlength="80" required>
         </label>
       </div>
 
@@ -423,18 +423,18 @@
 
       <label>
         Resumo do projeto*
-        <textarea name="message" rows="5" placeholder="Descreva rapidamente o que você quer construir" required></textarea>
+        <textarea name="message" rows="5" placeholder="Descreva rapidamente o que você quer construir" minlength="20" maxlength="1000" required></textarea>
       </label>
 
       <div class="estimate-panel" aria-label="Estimativa do projeto">
         <h3>Estimativa do projeto</h3>
         <label>
           Qual é o seu prazo estimado?*
-          <input type="text" name="estimatedTime" placeholder="Exemplo: 1 a 2 meses; 2 semanas" required>
+          <input type="text" name="estimatedTime" placeholder="Exemplo: 1 a 2 meses; 2 semanas" maxlength="80" required>
         </label>
         <label>
           Qual o orçamento estimado?*
-          <input type="text" name="budget" placeholder="Exemplo: R$ 1500" required>
+          <input type="text" name="budget" placeholder="Exemplo: R$ 1500" maxlength="60" required>
         </label>
       </div>
 
@@ -470,7 +470,7 @@
     </p>
     <div class="legal-actions">
       <a class="button button-secondary" href="#orcamento-tab" (click)="showBudgetTab($event)">Voltar ao orçamento</a>
-      <a class="button button-primary" href="https://wa.me/5547988805984?text=Ola%2C%20vim%20pelo%20site%20da%20Lain%20Software%20e%20quero%20tirar%20uma%20duvida%20sobre%20os%20termos." target="_blank" rel="noopener">
+      <a class="button button-primary" href="https://wa.me/5547988805984?text=Ola%2C%20vim%20pelo%20site%20da%20Lain%20Software%20e%20quero%20tirar%20uma%20duvida%20sobre%20os%20termos." target="_blank" rel="noopener noreferrer">
         <span class="button-icon" aria-hidden="true">WA</span>
         Tirar dúvida
       </a>
@@ -548,7 +548,7 @@
   <div class="social-area" aria-label="Redes sociais">
     <strong>Redes sociais</strong>
     <div class="social-links">
-      <a href="https://www.linkedin.com/company/lain-software" target="_blank" rel="noopener" title="LinkedIn da Lain Software">
+      <a href="https://www.linkedin.com/company/lain-software" target="_blank" rel="noopener noreferrer" title="LinkedIn da Lain Software">
         <img class="social-icon linkedin-icon" src="linkedin_icone_trimmed.webp" alt="" aria-hidden="true">
         LinkedIn
       </a>

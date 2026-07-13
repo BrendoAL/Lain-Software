@@ -166,7 +166,7 @@ export class App implements AfterViewInit {
       'Aceite: Li e aceito os Termos de Uso e a Politica de privacidade'
     ].join('\n');
 
-    window.open(`https://wa.me/5547988805984?text=${encodeURIComponent(message)}`, '_blank', 'noopener');
+    window.open(`https://wa.me/5547988805984?text=${encodeURIComponent(message)}`, '_blank', 'noopener,noreferrer');
   }
 
   private afterViewChange(callback: () => void): void {
