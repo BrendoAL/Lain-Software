@@ -5,10 +5,15 @@
         <img class="mini-icon phone-icon" src="telefone_icon.png" alt="" aria-hidden="true">
         <span>{{ copiedPhone() ? 'Telefone copiado' : '(47) 98880-5984' }}</span>
       </button>
-      <a href="mailto:contato@lainsoftware.com.br">
-        <img class="mini-icon email-icon" src="email_icon.png" alt="" aria-hidden="true">
-        contato&#64;lainsoftware.com.br
-      </a>
+      <span class="email-actions">
+        <a class="email-link" href="mailto:contato@lainsoftware.com.br" target="_self" aria-label="Enviar email para contato@lainsoftware.com.br">
+          <img class="mini-icon email-icon" src="email_icon.png" alt="" aria-hidden="true">
+          contato&#64;lainsoftware.com.br
+        </a>
+        <button class="email-copy" type="button" (click)="copyEmail()" [class.copied]="copiedEmail()" [attr.aria-label]="copiedEmail() ? 'Email copiado' : 'Copiar email contato@lainsoftware.com.br'">
+          {{ copiedEmail() ? 'Copiado' : 'Copiar' }}
+        </button>
+      </span>
     </div>
 
     <div class="top-social-links" aria-label="Redes sociais">
@@ -531,10 +536,15 @@
 
   <address>
     <strong>Contato</strong>
-    <a href="mailto:contato@lainsoftware.com.br">
-      <img class="mini-icon email-icon" src="email_icon.png" alt="" aria-hidden="true">
-      contato&#64;lainsoftware.com.br
-    </a>
+    <span class="email-actions">
+      <a class="email-link" href="mailto:contato@lainsoftware.com.br" target="_self" aria-label="Enviar email para contato@lainsoftware.com.br">
+        <img class="mini-icon email-icon" src="email_icon.png" alt="" aria-hidden="true">
+        contato&#64;lainsoftware.com.br
+      </a>
+      <button class="email-copy" type="button" (click)="copyEmail()" [class.copied]="copiedEmail()" [attr.aria-label]="copiedEmail() ? 'Email copiado' : 'Copiar email contato@lainsoftware.com.br'">
+        {{ copiedEmail() ? 'Copiado' : 'Copiar' }}
+      </button>
+    </span>
     <button class="phone-copy" type="button" (click)="copyPhone()" [class.copied]="copiedPhone()">
       <img class="mini-icon phone-icon" src="telefone_icon.png" alt="" aria-hidden="true">
       <span>{{ copiedPhone() ? 'Telefone copiado' : '(47) 98880-5984' }}</span>
