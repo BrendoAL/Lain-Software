@@ -13,6 +13,7 @@ type SectionId = 'inicio' | 'servicos' | 'diferenciais' | 'processo' | 'orcament
 export class App implements AfterViewInit {
   protected readonly title = signal('lain-software');
   protected readonly copiedPhone = signal(false);
+  protected readonly copiedEmail = signal(false);
   protected readonly quoteError = signal('');
   protected readonly activeView = signal<ActiveView>('home');
   protected readonly activeSection = signal<SectionId>('inicio');
@@ -21,6 +22,7 @@ export class App implements AfterViewInit {
 
   private readonly sectionIds: SectionId[] = ['inicio', 'servicos', 'diferenciais', 'processo', 'orcamento', 'duvidas'];
   private copyFeedbackTimeout?: ReturnType<typeof setTimeout>;
+  private copyEmailFeedbackTimeout?: ReturnType<typeof setTimeout>;
 
   ngAfterViewInit(): void {
     this.afterViewChange(() => this.syncPinnedHeader());
@@ -68,22 +70,19 @@ export class App implements AfterViewInit {
   protected async copyPhone(): Promise<void> {
     const phone = '+5547988805984';
 
-    if (navigator.clipboard?.writeText) {
-      await navigator.clipboard.writeText(phone);
-    } else {
-      const input = document.createElement('input');
-      input.value = phone;
-      input.style.position = 'fixed';
-      input.style.opacity = '0';
-      document.body.appendChild(input);
-      input.select();
-      document.execCommand('copy');
-      input.remove();
-    }
+    await this.copyText(phone);
 
     this.copiedPhone.set(true);
     clearTimeout(this.copyFeedbackTimeout);
     this.copyFeedbackTimeout = setTimeout(() => this.copiedPhone.set(false), 1800);
+  }
+
+  protected async copyEmail(): Promise<void> {
+    await this.copyText('contato@lainsoftware.com.br');
+
+    this.copiedEmail.set(true);
+    clearTimeout(this.copyEmailFeedbackTimeout);
+    this.copyEmailFeedbackTimeout = setTimeout(() => this.copiedEmail.set(false), 1800);
   }
 
   protected showHomeSection(event: Event, sectionId: SectionId): void {
@@ -172,6 +171,22 @@ export class App implements AfterViewInit {
 
   private afterViewChange(callback: () => void): void {
     setTimeout(callback);
+  }
+
+  private async copyText(text: string): Promise<void> {
+    if (navigator.clipboard?.writeText) {
+      await navigator.clipboard.writeText(text);
+      return;
+    }
+
+    const input = document.createElement('input');
+    input.value = text;
+    input.style.position = 'fixed';
+    input.style.opacity = '0';
+    document.body.appendChild(input);
+    input.select();
+    document.execCommand('copy');
+    input.remove();
   }
 
   private syncPinnedHeader(): void {
