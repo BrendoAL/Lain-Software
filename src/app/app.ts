@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, HostListener, signal } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, signal } from '@angular/core';
 
 type ActiveView = 'home' | 'budget';
 type LegalSectionId = 'termos-de-uso' | 'politica-de-privacidade';
@@ -10,32 +10,57 @@ type SectionId = 'inicio' | 'servicos' | 'diferenciais' | 'processo' | 'orcament
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
-export class App implements AfterViewInit {
+export class App implements AfterViewInit, OnDestroy {
   protected readonly title = signal('lain-software');
   protected readonly copiedPhone = signal(false);
-  protected readonly copiedEmail = signal(false);
   protected readonly quoteError = signal('');
   protected readonly activeView = signal<ActiveView>('home');
   protected readonly activeSection = signal<SectionId>('inicio');
   protected readonly activeLegalSection = signal<LegalSectionId | null>(null);
-  protected readonly pinnedHeader = signal(false);
 
   private readonly sectionIds: SectionId[] = ['inicio', 'servicos', 'diferenciais', 'processo', 'orcamento', 'duvidas'];
   private copyFeedbackTimeout?: ReturnType<typeof setTimeout>;
-  private copyEmailFeedbackTimeout?: ReturnType<typeof setTimeout>;
+  private activeSectionFrame?: number;
+  private readonly scheduleActiveSectionSync = (): void => {
+    if (typeof window === 'undefined' || this.activeSectionFrame !== undefined) {
+      return;
+    }
+
+    this.activeSectionFrame = window.requestAnimationFrame(() => {
+      this.activeSectionFrame = undefined;
+      this.syncActiveSection();
+    });
+  };
 
   ngAfterViewInit(): void {
-    this.afterViewChange(() => this.syncPinnedHeader());
+    if (typeof window === 'undefined') {
+      return;
+    }
+
+    this.afterViewChange(() => this.syncActiveSection());
+    window.addEventListener('scroll', this.scheduleActiveSectionSync, { passive: true });
+    window.addEventListener('resize', this.scheduleActiveSectionSync, { passive: true });
   }
 
-  @HostListener('window:scroll')
-  @HostListener('window:resize')
+  ngOnDestroy(): void {
+    clearTimeout(this.copyFeedbackTimeout);
+
+    if (typeof window === 'undefined') {
+      return;
+    }
+
+    window.removeEventListener('scroll', this.scheduleActiveSectionSync);
+    window.removeEventListener('resize', this.scheduleActiveSectionSync);
+
+    if (this.activeSectionFrame !== undefined) {
+      window.cancelAnimationFrame(this.activeSectionFrame);
+    }
+  }
+
   protected syncActiveSection(): void {
     if (typeof document === 'undefined') {
       return;
     }
-
-    this.syncPinnedHeader();
 
     if (this.activeView() !== 'home') {
       return;
@@ -75,14 +100,6 @@ export class App implements AfterViewInit {
     this.copiedPhone.set(true);
     clearTimeout(this.copyFeedbackTimeout);
     this.copyFeedbackTimeout = setTimeout(() => this.copiedPhone.set(false), 1800);
-  }
-
-  protected async copyEmail(): Promise<void> {
-    await this.copyText('contato@lainsoftware.com.br');
-
-    this.copiedEmail.set(true);
-    clearTimeout(this.copyEmailFeedbackTimeout);
-    this.copyEmailFeedbackTimeout = setTimeout(() => this.copiedEmail.set(false), 1800);
   }
 
   protected showHomeSection(event: Event, sectionId: SectionId): void {
@@ -191,16 +208,5 @@ export class App implements AfterViewInit {
     input.select();
     document.execCommand('copy');
     input.remove();
-  }
-
-  private syncPinnedHeader(): void {
-    if (typeof window === 'undefined' || typeof document === 'undefined') {
-      return;
-    }
-
-    const topContactBar = document.querySelector<HTMLElement>('.top-contact-bar');
-    const topContactHeight = topContactBar?.offsetHeight ?? 0;
-
-    this.pinnedHeader.set(window.scrollY > topContactHeight);
   }
 }

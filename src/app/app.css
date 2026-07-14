@@ -123,8 +123,7 @@ address span,
 
 .phone-copy:hover,
 .phone-copy.copied,
-.email-link:hover,
-.email-link.copied {
+.email-link:hover {
   color: var(--green);
 }
 
@@ -162,10 +161,16 @@ address span,
   width: 26px;
   height: 26px;
   padding: 0;
+  color: #d9ffe7;
   background: transparent;
   border: 0;
   border-radius: 0;
   filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.16));
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: none;
 }
 
 .phone-icon {
@@ -199,7 +204,8 @@ address span,
 }
 
 .site-header {
-  position: relative;
+  position: sticky;
+  top: env(safe-area-inset-top, 0);
   z-index: 20;
   display: flex;
   align-items: center;
@@ -210,26 +216,8 @@ address span,
   padding: 18px 0;
   backdrop-filter: blur(18px);
   transition:
-    transform 180ms ease,
     padding 180ms ease,
     width 180ms ease;
-}
-
-.site-header.header-pinned {
-  position: fixed;
-  top: env(safe-area-inset-top, 0);
-  left: 50%;
-  width: min(1180px, calc(100% - 32px));
-  transform: translateX(-50%);
-}
-
-.site-header-spacer {
-  display: none;
-  height: 84px;
-}
-
-.site-header-spacer.visible {
-  display: block;
 }
 
 .site-header::before {
@@ -1436,10 +1424,6 @@ address a:hover,
     flex-wrap: wrap;
   }
 
-  .site-header-spacer {
-    height: 126px;
-  }
-
   .site-header::before {
     border-radius: 18px;
   }
@@ -1530,14 +1514,6 @@ address a:hover,
     gap: 12px;
     padding: 14px 0;
     align-items: center;
-  }
-
-  .site-header.header-pinned {
-    width: min(100% - 24px, 1180px);
-  }
-
-  .site-header-spacer {
-    height: 122px;
   }
 
   .site-header::before {
@@ -1721,14 +1697,6 @@ address a:hover,
   .site-header {
     gap: 10px;
     padding: 12px 0;
-  }
-
-  .site-header.header-pinned {
-    width: min(100% - 20px, 1180px);
-  }
-
-  .site-header-spacer {
-    height: 112px;
   }
 
   .site-header::before {
