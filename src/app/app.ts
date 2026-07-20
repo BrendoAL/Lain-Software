@@ -48,6 +48,7 @@ export class App implements AfterViewInit, OnDestroy {
   private readonly sectionIds: SectionId[] = ['inicio', 'servicos', 'diferenciais', 'processo', 'clientes', 'orcamento', 'duvidas'];
   private copyFeedbackTimeout?: ReturnType<typeof setTimeout>;
   private activeSectionFrame?: number;
+  private topBarResizeObserver?: ResizeObserver;
   private readonly scheduleActiveSectionSync = (): void => {
     if (typeof window === 'undefined' || this.activeSectionFrame !== undefined) {
       return;
@@ -69,7 +70,11 @@ export class App implements AfterViewInit, OnDestroy {
       return;
     }
 
-    this.afterViewChange(() => this.syncActiveSection());
+    this.afterViewChange(() => {
+      this.syncTopBarHeight();
+      this.watchTopBarHeight();
+      this.syncActiveSection();
+    });
     window.addEventListener('scroll', this.scheduleActiveSectionSync, { passive: true });
     window.addEventListener('resize', this.scheduleActiveSectionSync, { passive: true });
     document.addEventListener('keydown', this.closeClientOnEscape);
@@ -85,6 +90,8 @@ export class App implements AfterViewInit, OnDestroy {
     window.removeEventListener('scroll', this.scheduleActiveSectionSync);
     window.removeEventListener('resize', this.scheduleActiveSectionSync);
     document.removeEventListener('keydown', this.closeClientOnEscape);
+    this.topBarResizeObserver?.disconnect();
+    document.documentElement.style.removeProperty('--top-bar-height');
 
     if (this.activeSectionFrame !== undefined) {
       window.cancelAnimationFrame(this.activeSectionFrame);
@@ -100,8 +107,10 @@ export class App implements AfterViewInit, OnDestroy {
       return;
     }
 
+    const topBar = document.querySelector<HTMLElement>('.top-contact-bar');
     const header = document.querySelector<HTMLElement>('.site-header');
-    const headerOffset = Math.round((header?.getBoundingClientRect().height ?? 130) + 44);
+    const topBarHeight = topBar?.getBoundingClientRect().height ?? 0;
+    const headerOffset = Math.round(topBarHeight + (header?.getBoundingClientRect().height ?? 130) + 44);
     let currentSection: SectionId = 'inicio';
 
     for (const sectionId of this.sectionIds) {
@@ -229,6 +238,34 @@ export class App implements AfterViewInit, OnDestroy {
 
   protected closeClientPreview(): void {
     this.selectedClient.set(null);
+  }
+
+  private watchTopBarHeight(): void {
+    if (typeof ResizeObserver === 'undefined' || this.topBarResizeObserver) {
+      return;
+    }
+
+    const topBar = document.querySelector<HTMLElement>('.top-contact-bar');
+
+    if (!topBar) {
+      return;
+    }
+
+    this.topBarResizeObserver = new ResizeObserver(() => {
+      this.syncTopBarHeight();
+      this.scheduleActiveSectionSync();
+    });
+    this.topBarResizeObserver.observe(topBar);
+  }
+
+  private syncTopBarHeight(): void {
+    if (typeof document === 'undefined') {
+      return;
+    }
+
+    const topBar = document.querySelector<HTMLElement>('.top-contact-bar');
+    const topBarHeight = Math.ceil(topBar?.getBoundingClientRect().height ?? 0);
+    document.documentElement.style.setProperty('--top-bar-height', `${topBarHeight}px`);
   }
 
   private afterViewChange(callback: () => void): void {
