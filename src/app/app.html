@@ -20,6 +20,10 @@
         <img class="social-icon linkedin-icon" src="linkedin_icone_trimmed.webp" width="28" height="28" alt="" aria-hidden="true" decoding="async">
         LinkedIn
       </a>
+      <a class="instagram-link" href="https://www.instagram.com/lainsoftware/" target="_blank" rel="noopener noreferrer" title="Instagram da Lain Software">
+        <img class="social-icon instagram-icon" src="instagram.webp" width="28" height="28" alt="" aria-hidden="true" decoding="async">
+        &#64;lainsoftware
+      </a>
     </div>
   </div>
 </div>
@@ -37,6 +41,7 @@
     <a href="#servicos" [class.active]="activeView() === 'home' && activeSection() === 'servicos'" (click)="showHomeSection($event, 'servicos')">Serviços</a>
     <a href="#diferenciais" [class.active]="activeView() === 'home' && activeSection() === 'diferenciais'" (click)="showHomeSection($event, 'diferenciais')">Diferenciais</a>
     <a href="#processo" [class.active]="activeView() === 'home' && activeSection() === 'processo'" (click)="showHomeSection($event, 'processo')">Processo</a>
+    <a href="#clientes" [class.active]="activeView() === 'home' && activeSection() === 'clientes'" (click)="showHomeSection($event, 'clientes')">Clientes</a>
     <a href="#orcamento-tab" [class.active]="activeView() === 'budget' || activeSection() === 'orcamento'" (click)="showBudgetTab($event)">Orçamento</a>
     <a href="#duvidas" [class.active]="activeView() === 'home' && activeSection() === 'duvidas'" (click)="showHomeSection($event, 'duvidas')">Dúvidas</a>
   </nav>
@@ -237,6 +242,32 @@
         <h3>Publicação</h3>
         <p>Deploy, configuração básica, orientação de uso e plano para próximas melhorias.</p>
       </article>
+    </div>
+  </section>
+
+  <section class="section clients-section" id="clientes" aria-labelledby="clients-title">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">Clientes atendidos</p>
+        <h2 id="clients-title">Projetos publicados com a Lain Software</h2>
+      </div>
+      <p>
+        Alguns trabalhos já entregues para negócios que precisavam de uma presença digital responsiva e para engajar pessoas
+      </p>
+    </div>
+
+    <div class="client-grid">
+      @for (client of clientWorks; track client.url) {
+        <button class="client-card" type="button" (click)="openClientPreview(client)" [attr.aria-label]="'Abrir trabalho ' + client.name">
+          <span class="client-image-frame">
+            <img [src]="client.image" [width]="client.imageWidth" [height]="client.imageHeight" [alt]="client.alt" decoding="async" loading="lazy">
+          </span>
+          <span class="client-card-copy">
+            <strong>{{ client.name }}</strong>
+            <span>Ver trabalho</span>
+          </span>
+        </button>
+      }
     </div>
   </section>
 
@@ -459,6 +490,22 @@
   </section>
 }
 
+@if (selectedClient(); as client) {
+  <div class="client-preview-backdrop" role="presentation" (click)="closeClientPreview()">
+    <section class="client-preview" role="dialog" aria-modal="true" aria-labelledby="client-preview-title" (click)="$event.stopPropagation()">
+      <button class="client-preview-close" type="button" aria-label="Fechar visualização" (click)="closeClientPreview()">×</button>
+      <div class="client-preview-image">
+        <img [src]="client.image" [width]="client.imageWidth" [height]="client.imageHeight" [alt]="client.alt" decoding="async">
+      </div>
+      <div class="client-preview-copy">
+        <p class="eyebrow">Cliente atendido</p>
+        <h2 id="client-preview-title">Visite o nosso trabalho!</h2>
+        <a [href]="client.url" target="_blank" rel="noopener noreferrer">{{ client.name }}</a>
+      </div>
+    </section>
+  </div>
+}
+
 @if (activeLegalSection()) {
 <section class="legal-page" aria-labelledby="legal-title">
   <div class="legal-hero">
@@ -557,6 +604,10 @@
       <a href="https://www.linkedin.com/company/lain-software" target="_blank" rel="noopener noreferrer" title="LinkedIn da Lain Software">
         <img class="social-icon linkedin-icon" src="linkedin_icone_trimmed.webp" width="28" height="28" alt="" aria-hidden="true" decoding="async" loading="lazy">
         LinkedIn
+      </a>
+      <a class="instagram-link" href="https://www.instagram.com/lainsoftware/" target="_blank" rel="noopener noreferrer" title="Instagram da Lain Software">
+        <img class="social-icon instagram-icon" src="instagram.webp" width="28" height="28" alt="" aria-hidden="true" decoding="async" loading="lazy">
+        &#64;lainsoftware
       </a>
     </div>
   </div>

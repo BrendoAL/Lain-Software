@@ -2,7 +2,15 @@ import { AfterViewInit, Component, OnDestroy, signal } from '@angular/core';
 
 type ActiveView = 'home' | 'budget';
 type LegalSectionId = 'termos-de-uso' | 'politica-de-privacidade';
-type SectionId = 'inicio' | 'servicos' | 'diferenciais' | 'processo' | 'orcamento' | 'duvidas';
+type SectionId = 'inicio' | 'servicos' | 'diferenciais' | 'processo' | 'clientes' | 'orcamento' | 'duvidas';
+type ClientWork = {
+  name: string;
+  url: string;
+  image: string;
+  imageWidth: number;
+  imageHeight: number;
+  alt: string;
+};
 
 @Component({
   selector: 'app-root',
@@ -17,8 +25,27 @@ export class App implements AfterViewInit, OnDestroy {
   protected readonly activeView = signal<ActiveView>('home');
   protected readonly activeSection = signal<SectionId>('inicio');
   protected readonly activeLegalSection = signal<LegalSectionId | null>(null);
+  protected readonly selectedClient = signal<ClientWork | null>(null);
+  protected readonly clientWorks: ClientWork[] = [
+    {
+      name: 'Artisticamente Egberto',
+      url: 'https://artisticamenteegberto.com.br/',
+      image: 'artisticamente-egberto.webp',
+      imageWidth: 1400,
+      imageHeight: 788,
+      alt: 'Página inicial do site Artisticamente Egberto'
+    },
+    {
+      name: 'Casa de Jairo',
+      url: 'https://casadejairo.online/',
+      image: 'casa-de-jairo.webp',
+      imageWidth: 1200,
+      imageHeight: 877,
+      alt: 'Página inicial do site Casa de Jairo'
+    }
+  ];
 
-  private readonly sectionIds: SectionId[] = ['inicio', 'servicos', 'diferenciais', 'processo', 'orcamento', 'duvidas'];
+  private readonly sectionIds: SectionId[] = ['inicio', 'servicos', 'diferenciais', 'processo', 'clientes', 'orcamento', 'duvidas'];
   private copyFeedbackTimeout?: ReturnType<typeof setTimeout>;
   private activeSectionFrame?: number;
   private readonly scheduleActiveSectionSync = (): void => {
@@ -31,6 +58,11 @@ export class App implements AfterViewInit, OnDestroy {
       this.syncActiveSection();
     });
   };
+  private readonly closeClientOnEscape = (event: KeyboardEvent): void => {
+    if (event.key === 'Escape' && this.selectedClient()) {
+      this.closeClientPreview();
+    }
+  };
 
   ngAfterViewInit(): void {
     if (typeof window === 'undefined') {
@@ -40,6 +72,7 @@ export class App implements AfterViewInit, OnDestroy {
     this.afterViewChange(() => this.syncActiveSection());
     window.addEventListener('scroll', this.scheduleActiveSectionSync, { passive: true });
     window.addEventListener('resize', this.scheduleActiveSectionSync, { passive: true });
+    document.addEventListener('keydown', this.closeClientOnEscape);
   }
 
   ngOnDestroy(): void {
@@ -51,6 +84,7 @@ export class App implements AfterViewInit, OnDestroy {
 
     window.removeEventListener('scroll', this.scheduleActiveSectionSync);
     window.removeEventListener('resize', this.scheduleActiveSectionSync);
+    document.removeEventListener('keydown', this.closeClientOnEscape);
 
     if (this.activeSectionFrame !== undefined) {
       window.cancelAnimationFrame(this.activeSectionFrame);
@@ -107,6 +141,7 @@ export class App implements AfterViewInit, OnDestroy {
     this.activeView.set('home');
     this.activeSection.set(sectionId);
     this.activeLegalSection.set(null);
+    this.selectedClient.set(null);
     this.quoteError.set('');
 
     this.afterViewChange(() => {
@@ -128,6 +163,7 @@ export class App implements AfterViewInit, OnDestroy {
     this.activeView.set('budget');
     this.activeSection.set('orcamento');
     this.activeLegalSection.set(null);
+    this.selectedClient.set(null);
     this.quoteError.set('');
 
     this.afterViewChange(() => {
@@ -140,6 +176,7 @@ export class App implements AfterViewInit, OnDestroy {
     event.preventDefault();
     event.stopPropagation();
     this.activeLegalSection.set(sectionId);
+    this.selectedClient.set(null);
     this.quoteError.set('');
 
     this.afterViewChange(() => {
@@ -184,6 +221,14 @@ export class App implements AfterViewInit, OnDestroy {
     ].join('\n');
 
     window.open(`https://wa.me/5547988805984?text=${encodeURIComponent(message)}`, '_blank', 'noopener,noreferrer');
+  }
+
+  protected openClientPreview(client: ClientWork): void {
+    this.selectedClient.set(client);
+  }
+
+  protected closeClientPreview(): void {
+    this.selectedClient.set(null);
   }
 
   private afterViewChange(callback: () => void): void {
